@@ -1,4 +1,5 @@
 import Fastify from "fastify";
+import {getFeature} from "./featureStore.mjs";
 
 export function createServer() {
   const fastify = Fastify({
@@ -7,7 +8,8 @@ export function createServer() {
 
   fastify.get("/feature/:code", async function handler(request, reply) {
     const { code } = request.params;
-    return reply.send({ "code":code, "enabled": true });
+    const enabled = await getFeature(code);
+    return reply.send({ code, enabled });
   });
 
   return fastify;
