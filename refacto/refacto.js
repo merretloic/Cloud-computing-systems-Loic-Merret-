@@ -1,4 +1,4 @@
-//Projet 1
+// Projet 1
 let env = {x: 1, y: "salut", z: 67};
 
 function lookup_variable(env, variable) {
@@ -12,11 +12,12 @@ function lookup_variable(env, variable) {
 
 console.log(lookup(env,"y"),lookup(env,"x"));
 
-//Projet 2
-app.post('/api/register', async (req, res) => {
+
+// Projet 2
+app.post('/api/register', async (req, res) => { // route pour enregistrer un client
     try {
-        const { email, password } = req.body;
-        const user = new User({ email, password });
+        const { email, password } = req.body; //extraire les données de la requète
+        const user = new User({ email, password }); // création de l'user
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -25,18 +26,19 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
+
 //Projet 3
-const handleMapClick = (location) => {
-    if (location.lat === undefined || location.lng === undefined) {
+const handle_Map_Click = (location) => { //When click on map
+    if (location.lat === undefined || location.lng === undefined) { //test si location n'est pas vide
       console.error('Invalid location object', location);
       return;
     }
 
-    console.log('in handleMapClick', location.lat, location.lng);
+    console.log('in handleMapClick', location.lat, location.lng);// tests de debug
     setNewLocation(location);  // Update the newLocation state with the clicked location
 
     // Update the location of a vehicle or station based on the selected type
-    if (selectingLocation && selectedType) {
+    if (selectingLocation && selectedType) { // test si requete est non-vide
       if (selectedType === 'vehicle') {
         console.log('in vehicle');
         updateVehicleLocation(location);
@@ -45,6 +47,6 @@ const handleMapClick = (location) => {
         console.log('in station');
         updateStationLocation(location);
       }
-      setSelectingLocation(false);  // End the selection mode
+      setSelectingLocation(false);  // Reset the selection mode
     }
   };
