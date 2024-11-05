@@ -28,25 +28,29 @@ app.post('/api/register', async (req, res) => { // route pour enregistrer un cli
 
 
 //Projet 3
-const handle_Map_Click = (location) => { //When click on map
-    if (location.lat === undefined || location.lng === undefined) { //test si location n'est pas vide
-      console.error('Invalid location object', location);
-      return;
-    }
-
-    console.log('in handleMapClick', location.lat, location.lng);// tests de debug
+const handleMapClick = (location) => { 
+    isLocationImported(location);
     setNewLocation(location);  // Update the newLocation state with the clicked location
-
-    // Update the location of a vehicle or station based on the selected type
-    if (selectingLocation && selectedType) { // test si requete est non-vide
-      if (selectedType === 'vehicle') {
-        console.log('in vehicle');
-        updateVehicleLocation(location);
-
-      } else if (selectedType === 'station') {
-        console.log('in station');
-        updateStationLocation(location);
-      }
-      setSelectingLocation(false);  // Reset the selection mode
-    }
+    updateLocationBasedOnType(location);
   };
+
+  function updateLocationOnType(location){
+    if (selectingLocation && selectedType) { // test si requete est non-vide
+        if (selectedType === 'vehicle') {
+          console.log('in vehicle');
+          updateVehicleLocation(location);
+  
+        } else if (selectedType === 'station') {
+          console.log('in station');
+          updateStationLocation(location);
+        }
+        setSelectingLocation(false);  // Reset the selection mode
+      }
+  }
+
+  function isLocationImported(location){
+    if (location.lat === undefined || location.lng === undefined) { //test si location n'est pas vide
+        console.error('Invalid location object', location);
+        return;
+      }
+  }
