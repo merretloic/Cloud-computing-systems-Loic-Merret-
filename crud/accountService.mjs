@@ -7,10 +7,13 @@ function addAccount(lastName, firstName) {
     accountDAO.insertAccount(account);
 }
 
+function getAccountList(){
+    return accountDAO.retrieveAccountList();
+}
 
 export const accountService = {
     addAccount,
-    getAccountList() {},
+    getAccountList,
     saveAccount(id, lastName, firstName) {},
     getAccount(id) {},
   };

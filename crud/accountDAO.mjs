@@ -6,9 +6,19 @@ function insertAccount(account){
     
 }
 
+function retrieveAccountList(deletedItem){
+    if (deletedItem){
+        return ACCOUNT_LIST.map(({ deletedItem, ...rest }) => rest);
+    }
+    else{
+        return ACCOUNT_LIST;
+        
+    }
+}
+
 export const accountDAO = {
   insertAccount,
-  retrieveAccountList() {},
+  retrieveAccountList,
   updateAccount(account) {},
   retrieveAccount(id) {},
 };
