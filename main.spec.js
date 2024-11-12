@@ -22,10 +22,19 @@ test("transfer money to account", () => {
     
     jest.spyOn(bankTransfer, "transfer").mockReturnValue(expectedAmount);
     
-    const amount = bank.transferMoney(idAccount,expectedAmount);
+    const transferResult = bank.transferMoney(idAccount,expectedAmount);
 
     expect(jest.spyOn(bankTransfer, "transfer")).toHaveBeenCalledWith(idAccount,expectedAmount);
     
-    expect(amount).toBe(expectedAmount);
+    expect(transferResult).toBe(expectedAmount);
 });
 
+test("debit", () => {
+    const idAccount=123;
+    const expectedAmount=1000;
+    
+    jest.spyOn(bankDAO, "debitAccount").mockReturnValue(expectedAmount);
+    bank.transferMoney(idAccount,expectedAmount);
+    expect(jest.spyOn(bankDAO, "debitAccount")).toHaveBeenCalledWith(idAccount,expectedAmount);
+    
+});

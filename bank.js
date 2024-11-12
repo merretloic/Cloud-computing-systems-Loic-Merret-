@@ -5,7 +5,9 @@ function getBalance(idAccount){
     return bankDAO.retrieveBalance(idAccount);
 };
 function transferMoney(idAccount,amount){
-    return bankTransfer.transfer(idAccount,amount);
+    const transferResult = bankTransfer.transfer(idAccount, amount);
+    bankDAO.debitAccount(idAccount, amount);
+    return transferResult;
 }
 const bank ={
     getBalance,
