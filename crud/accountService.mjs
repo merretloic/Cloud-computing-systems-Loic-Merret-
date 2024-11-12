@@ -7,15 +7,27 @@ function addAccount(lastName, firstName) {
     accountDAO.insertAccount(account);
 }
 
-function getAccountList(){
-    return accountDAO.retrieveAccountList();
+function getAccountList(deletedItem){
+    return accountDAO.retrieveAccountList(deletedItem);
+}
+
+function getAccount(id){
+    return accountDAO.retrieveAccount(id);
+}
+
+function saveAccount(id,  lastName, firstName){
+    const newAccountData = getAccount(id);
+    newAccountData.lastName = lastName;
+    newAccountData.firstName = firstName;
+    console.log("yo", newAccountData);
+    return accountDAO.updateAccount(id , newAccountData);
 }
 
 export const accountService = {
     addAccount,
     getAccountList,
-    saveAccount(id, lastName, firstName) {},
-    getAccount(id) {},
+    saveAccount,
+    getAccount,
   };
 
 export default accountService;

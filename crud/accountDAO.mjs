@@ -7,8 +7,8 @@ function insertAccount(account){
 }
 
 function retrieveAccountList(deletedItem){
-    if (deletedItem){
-        return ACCOUNT_LIST.map(({ deletedItem, ...rest }) => rest);
+    if (deletedItem == "creationDate"){
+        return ACCOUNT_LIST.map(({ creationDate, ...rest }) => rest);
     }
     else{
         return ACCOUNT_LIST;
@@ -16,11 +16,24 @@ function retrieveAccountList(deletedItem){
     }
 }
 
+function retrieveAccount(searchId){
+    return ACCOUNT_LIST.find(({ id }) => id == searchId);
+}
+
+function updateAccount(searchId, newAccountData){
+    return ACCOUNT_LIST.map(({ id }) => {
+        if (id === searchId) {
+            return { id: { ...id, ...newAccountData } };
+        }
+        return {newAccountData};
+    });
+}
+
 export const accountDAO = {
   insertAccount,
   retrieveAccountList,
-  updateAccount(account) {},
-  retrieveAccount(id) {},
+  updateAccount,
+  retrieveAccount,
 };
 
 export default accountDAO;
