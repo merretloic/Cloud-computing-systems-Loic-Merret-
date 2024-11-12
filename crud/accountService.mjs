@@ -1,15 +1,15 @@
-import { Account } from "account.mjs";
-import { accountDAO } from "accountDAO.mjs";
+import { Account } from "./account.mjs";
+import { accountDAO } from "./accountDAO.mjs";
 
 function addAccount(lastName, firstName) {
-
-    Account = new Account(lastName, firstName);
-    accountDAO.insertAccount(Account);
+    console.log("in addAccount");
+    const account = new Account(null, lastName, firstName, null);
+    accountDAO.insertAccount(account);
 }
 
 
 export const accountService = {
-    addAccount(lastName, firstName) {},
+    addAccount,
     getAccountList() {},
     saveAccount(id, lastName, firstName) {},
     getAccount(id) {},
