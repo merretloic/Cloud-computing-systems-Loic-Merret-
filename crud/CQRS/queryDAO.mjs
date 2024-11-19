@@ -4,7 +4,7 @@ import { accountSummaryList } from "./queryDatabase.mjs";
 
 function retrieveAccountList(deletedItem){
     if (deletedItem == "creationDate"){
-        return ACCOUNT_LIST.map(({ creationDate, ...rest }) => rest);
+        return accountSummaryList.map(({ creationDate, ...rest }) => rest);
     }
     else{
         return accountSummaryList;
@@ -13,21 +13,15 @@ function retrieveAccountList(deletedItem){
 }
 
 function retrieveAccount(searchId) {
-    //const account = ACCOUNT_LIST.find(({ id }) => id === searchId);
-    //if (account) {
-    //    return {
-    //        id: account.id,
-    //        name: `${account.firstName} ${account.lastName}`,
-    //        creationDate: account.creationDate,
-    //    };
-    //}
-    //return null;
-    if (accountCache[searchId]){
-        return accountCache[searchId].name;
+    const account = accountSummaryList.find(({ id }) => id === searchId);
+    if (account) {
+       return {
+            id: account.id,
+            name: accountCache[searchId].name,
+            creationDate: account.creationDate,
+        };
     }
-    else {
-        return `Account not found`;
-    }
+    return null;
 }
 
 export const queryDAO = {

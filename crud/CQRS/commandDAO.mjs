@@ -7,6 +7,18 @@ function insertAccount(account, database){
     
 }
 
+function retrieveAccount(searchId) {
+    const account = ACCOUNT_LIST.find(({ id }) => id === searchId);
+    if (account) {
+       return {
+            id: account.id,
+            name: accountCache[searchId].name,
+            creationDate: account.creationDate,
+        };
+    }
+    return null;
+}
+
 function updateAccount(searchId, newAccountData, database){
     if (database == accountCache){
         accountCache[searchId] = newAccountData;
@@ -24,6 +36,7 @@ function updateAccount(searchId, newAccountData, database){
 
 export const commandDAO = {
     insertAccount,
-    updateAccount
+    updateAccount,
+    retrieveAccount
 }
 
