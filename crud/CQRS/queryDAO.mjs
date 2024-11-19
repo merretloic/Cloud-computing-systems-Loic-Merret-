@@ -1,11 +1,12 @@
 import { ACCOUNT_LIST } from "./database.mjs";
+import { accountSummaryList } from "./queryDatabase.mjs";
 
 function retrieveAccountList(deletedItem){
     if (deletedItem == "creationDate"){
         return ACCOUNT_LIST.map(({ creationDate, ...rest }) => rest);
     }
     else{
-        return ACCOUNT_LIST;
+        return accountSummaryList;
         
     }
 }
