@@ -1,3 +1,4 @@
+import { accountCache } from "./cache.mjs";
 import { ACCOUNT_LIST } from "./database.mjs";
 
 function insertAccount(account, database){   
@@ -7,12 +8,18 @@ function insertAccount(account, database){
 }
 
 function updateAccount(searchId, newAccountData, database){
-    return database.map(({ id }) => {
-        if (id === searchId) {
-            return { id: { ...id, ...newAccountData } };
-        }
-        return {newAccountData};
-    });
+    if (database == accountCache){
+        accountCache[searchId] = newAccountData;
+        return accountCache;
+    }
+    else{
+        return database.map(({ id }) => {
+            if (id === searchId) {
+                return { id: { ...id, ...newAccountData } };
+            }
+            return {newAccountData};
+        });
+    } 
 }
 
 export const commandDAO = {
