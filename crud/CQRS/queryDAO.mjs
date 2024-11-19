@@ -1,3 +1,5 @@
+import { ACCOUNT_LIST } from "./database.mjs";
+
 function retrieveAccountList(deletedItem){
     if (deletedItem == "creationDate"){
         return ACCOUNT_LIST.map(({ creationDate, ...rest }) => rest);

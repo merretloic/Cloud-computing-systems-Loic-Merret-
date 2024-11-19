@@ -1,15 +1,18 @@
+import { Account } from "./account.mjs";
+import { commandDAO } from "./commandDAO.mjs";
+import { accountQuery } from "./accountQuery.mjs";
 
 function addAccount(lastName, firstName) {
     const account = new Account(null, lastName, firstName, null);
-    accountDAO.insertAccount(account);
+    commandDAO.insertAccount(account);
 }
 
 function saveAccount(id,  lastName, firstName){
-    const newAccountData = getAccount(id);
+    const newAccountData = accountQuery.getAccount(id);
     newAccountData.lastName = lastName;
     newAccountData.firstName = firstName;
     console.log("yo", newAccountData);
-    return accountDAO.updateAccount(id , newAccountData);
+    return commandDAO.updateAccount(id , newAccountData);
 }
 
 
