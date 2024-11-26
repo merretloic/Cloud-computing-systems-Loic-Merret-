@@ -1,0 +1,8 @@
+:root {
+    --space-fine: 1rem;   /* Petit espace */
+    --space-medium: 2rem; /* Espace moyen */
+    --space-large: 3rem;  /* Grand espace */
+    --main-color: green; 
+    --border: 2px solid crimson;
+  }
+  
